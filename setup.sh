@@ -14,10 +14,15 @@ install_uwsgi(){
     mkdir $buzzni_path
     cp -R ./py_src/uwsgi $buzzni_path
 
-    echo "alias uwsgi_start=\"python $buzzni_path/uwsgi/uwsgi_start.py\"" >> ~/.bashrc
-    echo "alias uwsgi_stop=\"python $buzzni_path/uwsgi/uwsgi_stop.py\"" >> ~/.bashrc
-    echo "alias uwsgi_show=\"python $buzzni_path/uwsgi/uwsgi_show.py\"" >> ~/.bashrc
-    echo "alias uwsgi_reload=\"python $buzzni_path/uwsgi/uwsgi_reload.py\"" >> ~/.bashrc
+    chmod 755 $buzzni_path/uwsgi/uwsgi_start.py
+    chmod 755 $buzzni_path/uwsgi/uwsgi_stop.py
+    chmod 755 $buzzni_path/uwsgi/uwsgi_show.py
+    chmod 755 $buzzni_path/uwsgi/uwsgi_reload.py
+
+    ln -s $buzzni_path/uwsgi/uwsgi_start.py /usr/sbin/uwsgi_start
+    ln -s $buzzni_path/uwsgi/uwsgi_stop.py /usr/sbin/uwsgi_stop
+    ln -s $buzzni_path/uwsgi/uwsgi_show.py /usr/sbin/uwsgi_show
+    ln -s $buzzni_path/uwsgi/uwsgi_reload.py /usr/sbin/uwsgi_reload
 
     cp ./bash_src/uwsgi/buwsgi.sh /etc/init.d/buwsgi
     chmod 755 /etc/init.d/buwsgi
@@ -36,6 +41,8 @@ remove(){
     rm -rf /tmp/buzzni
 
     rm /etc/init.d/buwsgi
+
+    rm /usr/sbin/uwsgi_*
 }
 case "$1" in
     uwsgi)
