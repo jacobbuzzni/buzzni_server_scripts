@@ -1,16 +1,43 @@
 # -*- coding : utf-8 -*-
 
-import os
+import os, json
 from optparse import OptionParser
+import commands
 
 def read_file(path, read_type="line_list", option="r"):
     """ read_type : all_string, line_list
     """
-    fp = open(path, option)
+    if os.path.isfile(path):
+        fp = open(path, option)
+    else:
+        raise Exception, "no search file.("+path+")"
     if read_type == "all_string":
         return fp.read()
     elif read_type == "line_list":
         return fp.readlines()
+
+def open_file(path, option="r+"):
+    if not os.path.isfile(path):
+        open(path, "w").close()
+    return open(path, option)
+
+def rm_file(path):
+    return os.remove(path)
+
+def read_json(path):
+    fp = open_file(path, "r+")
+    read_result = fp.read()
+    dict_obj = {}
+    if read_result:
+        dict_obj = json.loads(read_result)
+    fp.close()
+    return dict_obj
+
+def write_json(path, obj):
+    json_string = json.dumps(obj)
+    fp = open_file(path, "w+")
+    fp.write(json_string+"\n")
+    fp.close()
 
 def make_optparser(description, options):
     parser = OptionParser(usage=description.decode("utf-8"))
@@ -56,16 +83,15 @@ def check_path(path_list):
         if not os.path.isdir(path):
             os.makedirs(path)
 
+def cmd(cmd_string):
+    return commands.getstatusoutput(cmd_string)
 
+def is_root():
+    return not(os.getuid())
 
-
-
-
-
-
-
-
-
-
+def root_check():
+    if not is_root():
+        print "[!] r u root?"
+        exit(0)
 
 
