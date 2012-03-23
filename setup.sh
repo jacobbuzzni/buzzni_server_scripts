@@ -41,6 +41,7 @@ remove(){
     rm -rf /tmp/buzzni
 
     rm /usr/sbin/uwsgi_*
+    rm /usr/sbin/buwsgi
 }
 case "$1" in
     uwsgi)
