@@ -24,9 +24,6 @@ install_uwsgi(){
     ln -s $buzzni_path/uwsgi/uwsgi_show.py /usr/sbin/uwsgi_show
     ln -s $buzzni_path/uwsgi/uwsgi_reload.py /usr/sbin/uwsgi_reload
 
-    cp ./bash_src/uwsgi/buwsgi.sh /etc/init.d/buwsgi
-    chmod 755 /etc/init.d/buwsgi
-
     mkdir -p /etc/buzzni/uwsgi/
     cp ./py_src/sample/uwsgi.ini /etc/buzzni/uwsgi/
 
@@ -39,9 +36,7 @@ remove(){
     rm -rf $buzzni_path
     rm -rf /etc/buzzni
     rm -rf /tmp/buzzni
-
-    rm /etc/init.d/buwsgi
-
+    
     rm /usr/sbin/uwsgi_*
 }
 case "$1" in
