@@ -11,8 +11,11 @@ from scripts_utils import ini_parser
 from scripts_utils import read_json
 from scripts_utils import root_check
 
+_BUZZNI_CONF_PATH = "/etc/buzzni/uwsgi/"
+
 def main(options):
     ini = options.ini
+    ini = _BUZZNI_CONF_PATH + ini + ".ini"
 
     if not(ini):
         print options

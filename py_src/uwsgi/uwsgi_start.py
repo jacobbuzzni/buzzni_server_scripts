@@ -14,10 +14,13 @@ from scripts_utils import read_json, write_json
 from scripts_utils import root_check
 import datetime
 
+_BUZZNI_CONF_PATH = "/etc/buzzni/uwsgi/"
+
 def main(options):
     print "[+] starting uwsgi server"
     name = options.name
     ini = options.ini
+    ini = _BUZZNI_CONF_PATH + ini + ".ini"
 
     if not(name and ini):
         print options
@@ -41,9 +44,7 @@ def main(options):
 
         cmd_string = "uwsgi --pidfile=%s --socket=%s --ini=%s" % (pid, sock, ini)
 
-        print cmd_string
         status, msg = cmd(cmd_string)
-        print status, msg
 
         dict_obj[name] = {
             "date":str(datetime.datetime.now()),
@@ -52,7 +53,6 @@ def main(options):
             "ini":ini
         }
         write_json(dict_path+"/dictionary.info", dict_obj)
-
     print "[+] finish!"
 
 if __name__ == "__main__":
@@ -68,7 +68,7 @@ if __name__ == "__main__":
         {
             "name":"ini",
             "default":"",
-            "description":"set ini configure file path"
+            "description":"set ini configure file name"
         }
     ]
     options, args = make_optparser(desc, options)

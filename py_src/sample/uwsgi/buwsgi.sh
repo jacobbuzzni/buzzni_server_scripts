@@ -7,13 +7,12 @@ then
 fi
 
 _start(){
-    uwsgi_start --name=[name] --ini=[ini_path];
-
+    #uwsgi_start --name=[name] --ini=[ini_path];
     service nginx restart;
 }
 
 _stop(){
-    uwsgi_stop --name=[name] --ini=[ini_path];
+    #uwsgi_stop --name=[name] --ini=[ini_path];
 
     sleep 2;
     service nginx restart;

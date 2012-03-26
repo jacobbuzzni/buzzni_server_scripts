@@ -55,7 +55,7 @@ def ini_parser(ini_lines):
     obj_name = ""
     for line in ini_lines:
         line = line.replace("\n", "").replace(" ","")
-        if line[0] == "#": # ignore lines
+        if line[0] == "#" or len(line) < 3: # ignore lines
             continue
 
         if line[0] == "[":

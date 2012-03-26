@@ -18,18 +18,16 @@ install_uwsgi(){
     chmod 755 $buzzni_path/uwsgi/uwsgi_start.py
     chmod 755 $buzzni_path/uwsgi/uwsgi_stop.py
     chmod 755 $buzzni_path/uwsgi/uwsgi_show.py
-    chmod 755 $buzzni_path/uwsgi/uwsgi_reload.py
     cp ./py_src/sample/uwsgi/buwsgi.sh $buzzni_path/uwsgi/buwsgi
     chmod 755 $buzzni_path/uwsgi/buwsgi
 
     ln -s $buzzni_path/uwsgi/uwsgi_start.py /usr/sbin/uwsgi_start
     ln -s $buzzni_path/uwsgi/uwsgi_stop.py /usr/sbin/uwsgi_stop
     ln -s $buzzni_path/uwsgi/uwsgi_show.py /usr/sbin/uwsgi_show
-    ln -s $buzzni_path/uwsgi/uwsgi_reload.py /usr/sbin/uwsgi_reload
     ln -s $buzzni_path/uwsgi/buwsgi /usr/sbin/buwsgi
 
     mkdir -p /etc/buzzni/uwsgi/
-    cp ./py_src/sample/uwsgi/uwsgi.ini /etc/buzzni/uwsgi/
+    cp ./py_src/sample/uwsgi/uwsgi.ini /etc/buzzni/uwsgi/uwsgi_setting.sample.ini
 
     echo "[+] success."
     echo "[!!] add scripts at /usr/share/buzzni/uwsgi/buwsgi"
